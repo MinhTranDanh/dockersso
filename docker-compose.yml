@@ -1,0 +1,27 @@
+version: "3.7"
+services:
+  iam:
+    container_name: iam
+    hostname: iam
+    image: 	devmenter23/iam:6.1.0-latest
+    restart: always
+    # extra_hosts:
+    #   - "is.demozone.vn:10.2.22.73"
+    #   - "apim.demozone.vn:10.2.22.202"
+    networks:
+      - cds
+    environment:
+      - PROXYPORT='443'
+      - HOSTNAME_URL=sso-mic.demozone.vn
+      - ADMIN_USER=admin
+      - ADMIN_PASSWORD=admin
+      - USER_SSO=sso
+      - PASS_SSO=z13mtqGdz2AqNZldgQZM
+      - MYSQL_ADDRESS=mysql
+      - PORT_DB=3306
+      - JVM_MEM_OPTS=${JVM_MEM_OPTS}
+    ports:
+      - "9443:9443"
+networks:
+  cds:
+    external: true
